@@ -1,0 +1,18 @@
+[
+  {
+    "ProductTypeId": 1,
+    "ProductTypeName": "Boards"
+  },
+  {
+    "ProductTypeId": 2,
+    "ProductTypeName": "Hats"
+  },
+  {
+    "ProductTypeId": 3,
+    "ProductTypeName": "Boots"
+  },
+  {
+    "ProductTypeId": 4,
+    "ProductTypeName": "Gloves"
+  }
+]
