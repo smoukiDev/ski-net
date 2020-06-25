@@ -1,18 +1,18 @@
 [
   {
-    "ProductTypeId": 1,
-    "ProductTypeName": "Boards"
+    "Id": 1,
+    "Name": "Boards"
   },
   {
-    "ProductTypeId": 2,
-    "ProductTypeName": "Hats"
+    "Id": 2,
+    "Name": "Hats"
   },
   {
-    "ProductTypeId": 3,
-    "ProductTypeName": "Boots"
+    "Id": 3,
+    "Name": "Boots"
   },
   {
-    "ProductTypeId": 4,
-    "ProductTypeName": "Gloves"
+    "Id": 4,
+    "Name": "Gloves"
   }
 ]

@@ -1,9 +1,7 @@
 namespace Core.Entities
 {
-    public class ProductBrand
+    public class ProductBrand : BaseEntity
     {
-        public int ProductBrandId { get; set; }
-
-        public string ProductBrandName { get; set; }
+        public string Name { get; set; }
     }
 }
