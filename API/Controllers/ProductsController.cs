@@ -4,6 +4,8 @@ using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Core.Interfaces;
 using Core.Specifications;
+using API.DataTransferObjects;
+using System.Linq;
 
 namespace API.Controllers
 {
@@ -27,16 +29,26 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts()
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDTO>>> GetProducts()
         {
             var spec = new ProductsWithTypesAndBrandsSpecification();
             var products = await _productRepo.ListAsync(spec);
-
-            return Ok(products);
+            return Ok(
+                products.Select(product => new ProductToReturnDTO
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Description = product.Description,
+                        Price = product.Price,
+                        ProductBrand = product.ProductBrand.Name,
+                        ProductType = product.ProductType.Name
+                    }
+                ).ToList()
+            );
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductToReturnDTO>> GetProduct(int id)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
 
@@ -44,10 +56,20 @@ namespace API.Controllers
 
             if (product == null)
             {
-                return NotFound();
+                return NotFound(); 
             }
 
-            return Ok(product);
+            var productToReturn = new ProductToReturnDTO
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                ProductBrand = product.ProductBrand.Name,
+                ProductType = product.ProductType.Name
+            };
+
+            return Ok(productToReturn);
         }
 
         [HttpGet("brands")]
@@ -56,6 +78,7 @@ namespace API.Controllers
             var brands = await _productBrandRepo.ListAllAsync();
             return Ok(brands);
         }
+
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
         {
