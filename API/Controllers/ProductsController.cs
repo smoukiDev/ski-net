@@ -7,6 +7,7 @@ using Core.Specifications;
 using API.DataTransferObjects;
 using System.Linq;
 using AutoMapper;
+using API.Errors;
 
 namespace API.Controllers
 {
@@ -49,7 +50,8 @@ namespace API.Controllers
 
             if (product == null)
             {
-                return NotFound(); 
+                // TODO: Magic number
+                return NotFound( new ApiResponse(404) ); 
             }
 
             return Ok(
