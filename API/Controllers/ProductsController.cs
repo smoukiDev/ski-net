@@ -11,7 +11,7 @@ using API.Errors;
 
 namespace API.Controllers
 {
-    public class ProductsController : BaseController
+    public class ProductsController : BaseApiController
      {
         private readonly IGenericRepository<Product> _productRepo;
         private readonly IGenericRepository<ProductType> _productTypeRepo;
