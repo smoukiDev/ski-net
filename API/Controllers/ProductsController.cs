@@ -44,6 +44,10 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductToReturnDTO>> GetProduct(int id)
         {
+            // Test Exception Middleware
+            // Product test = null;
+            // test.ToString();
+
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
 
             var product = await _productRepo.GetEntityWithSpec(spec);
