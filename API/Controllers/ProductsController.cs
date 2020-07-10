@@ -8,6 +8,7 @@ using API.DataTransferObjects;
 using System.Linq;
 using AutoMapper;
 using API.Errors;
+using System.Net;
 
 namespace API.Controllers
 {
@@ -54,8 +55,9 @@ namespace API.Controllers
 
             if (product == null)
             {
-                // TODO: Magic number
-                return NotFound( new ApiResponse(404) ); 
+                return NotFound( 
+                    new ApiResponse( (int) HttpStatusCode.NotFound )
+                ); 
             }
 
             return Ok(

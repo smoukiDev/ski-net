@@ -40,11 +40,11 @@ namespace API.Middleware
                 int code = (int) HttpStatusCode.InternalServerError;
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = code;
-                var response = _env.IsDevelopment() ? new ApiException(
+                var response = _env.IsDevelopment() ? new ApiExceptionResponse(
                     code,
                     ex.Message,
                     ex.StackTrace.ToString()
-                ) : new ApiException(code);
+                ) : new ApiExceptionResponse(code);
                 var options = new JsonSerializerOptions {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 };

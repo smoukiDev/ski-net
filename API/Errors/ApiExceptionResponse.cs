@@ -1,8 +1,8 @@
 namespace API.Errors
 {
-    public class ApiException : ApiResponse
+    public class ApiExceptionResponse : ApiResponse
     {
-        public ApiException(
+        public ApiExceptionResponse(
             int statusCode, 
             string message = null,
             string details = null
