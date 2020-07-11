@@ -16,22 +16,30 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace API
 {
     public class Startup
     {
         private readonly IConfiguration _config;
+        private readonly string _apiName;
+        private readonly string _apiVersion;
+
         public Startup(IConfiguration config)
         {
             _config = config;
+
+            // Api documentation variables
+            _apiName = _config.GetValue<string>("ApiDocumentation:Name");
+            _apiVersion = _config.GetValue<string>("ApiDocumentation:Version");
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            // TODO: understand better
+            // TODO: Understand better
             services.Configure<ApiBehaviorOptions>(options => {
                 options.InvalidModelStateResponseFactory = actionContext => {
                         var errors = actionContext.ModelState
@@ -53,6 +61,12 @@ namespace API
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(typeof(Helpers.MappingProfiles));
+            services.AddSwaggerGen(o => {
+                o.SwaggerDoc(_apiVersion, new OpenApiInfo{
+                    Title = _apiName,
+                    Version = _apiVersion
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +88,12 @@ namespace API
             app.UseStaticFiles();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(o => {
+                o.SwaggerEndpoint(
+                    $"/swagger/{_apiVersion}/swagger.json", _apiName);
+            });
 
             app.UseEndpoints(endpoints =>
             {
