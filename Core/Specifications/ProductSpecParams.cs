@@ -20,5 +20,13 @@ namespace Core.Specifications
 
         // Field sort by
         public string Sort { get; set; }
+
+        // Search
+        private string _search;
+        public string Search { 
+            get => _search; 
+            // find items no matter which case in used in input
+            set => _search = value.ToLower(); 
+        }
     }
 }

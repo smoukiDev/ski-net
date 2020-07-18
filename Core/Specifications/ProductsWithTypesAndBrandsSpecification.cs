@@ -6,8 +6,11 @@ namespace Core.Specifications
        : BaseSpecification<Product>
     {
         public ProductsWithTypesAndBrandsSpecification(ProductSpecParams productParams)
-            // TODO: Understand better
+            // TODO: Understand better.
+            // TODO: Looks noisy. Used twice
+            // TODO: Multifield search
             : base( p =>
+                    (string.IsNullOrEmpty(productParams.Search) || p.Name.ToLower().Contains(productParams.Search) ) &&
                     (!productParams.BrandId.HasValue || p.ProductBrandId == productParams.BrandId) &&
                     (!productParams.TypeId.HasValue || p.ProductTypeId == productParams.TypeId)
             )
