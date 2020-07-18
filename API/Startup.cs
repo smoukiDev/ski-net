@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using API.Extensions;
 using API.Middleware;
 using AutoMapper;
@@ -13,6 +14,7 @@ namespace API
     public class Startup
     {
         private readonly IConfiguration _config;
+        private readonly string _corsPolicy = "CorsPolicy";
 
         public Startup(IConfiguration config)
         {
@@ -31,6 +33,18 @@ namespace API
 
             services.AddAutoMapper(typeof(Helpers.MappingProfiles));
             services.AddSwaggerDocumentation(_config);
+            // TODO: Extract to settings.json
+            services.AddCors(o => 
+                o.AddPolicy(_corsPolicy, policy =>
+                    {
+                        var origins = _config.GetSection("CorsAllowedOrigins").Get<List<string>>();
+                        foreach(var origin in origins)
+                        {
+                            policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(origin);
+                        }
+                    }
+                )
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +61,8 @@ namespace API
             app.UseRouting();
 
             app.UseStaticFiles();
+
+            app.UseCors(_corsPolicy);
 
             app.UseAuthorization();
 
