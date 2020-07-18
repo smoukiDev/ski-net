@@ -10,6 +10,7 @@ using AutoMapper;
 using API.Errors;
 using System.Net;
 using Microsoft.AspNetCore.Http;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -34,14 +35,16 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        // TODO: Too much input parameters in signature
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDTO>>> GetProducts(
-            string sort, int? brandId, int? typeId)
+        public async Task<ActionResult<Pagination<ProductToReturnDTO>>> GetProducts(
+            [FromQuery] ProductSpecParams productParams)
         {
-            var spec = new ProductsWithTypesAndBrandsSpecification(sort, brandId, typeId);
+            var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
+            var countSpec = new ProductWithFiltersForCountSpecification(productParams);
+            var totalItems = await _productRepo.CountAsync(countSpec);
             var products = await _productRepo.ListAsync(spec);
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDTO>>(products);
             return Ok(
-                _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDTO>>(products)
+                new Pagination<ProductToReturnDTO>(productParams.PageIndex, productParams.PageSize, totalItems, data)
             );
         }
 
