@@ -1,26 +1,26 @@
 [
   {
-    "ProductBrandId": 1,
-    "ProductBrandName": "Angular"
+    "Id": 1,
+    "Name": "Angular"
   },
   {
-    "ProductBrandId": 2,
-    "ProductBrandName": "NetCore"
+    "Id": 2,
+    "Name": "NetCore"
   },
   {
-    "ProductBrandId": 3,
-    "ProductBrandName": "VS Code"
+    "Id": 3,
+    "Name": "VS Code"
   },
   {
-    "ProductBrandId": 4,
-    "ProductBrandName": "React"
+    "Id": 4,
+    "Name": "React"
   },
   {
-    "ProductBrandId": 5,
-    "ProductBrandName": "Typescript"
+    "Id": 5,
+    "Name": "Typescript"
   },
   {
-    "ProductBrandId": 6,
-    "ProductBrandName": "Redis"
+    "Id": 6,
+    "Name": "Redis"
   }
 ]
