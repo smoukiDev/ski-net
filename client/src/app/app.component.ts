@@ -1,7 +1,4 @@
-import { IProduct } from './shared/models/product';
-import { IPagination } from './shared/models/pagination';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { VirtualTimeScheduler } from 'rxjs';
 
 @Component({
@@ -11,14 +8,6 @@ import { VirtualTimeScheduler } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   title = 'Skinet';
-  products: IProduct[];
-  constructor(private http: HttpClient){}
-  ngOnInit(): void {
-    this.http.get('https://localhost:5001/api/products?pageSize=50').subscribe((response: IPagination) => {
-      this.products = response.data;
-      console.log(response);
-    }, error => {
-      console.log(error);
-    });
-  }
+  constructor(){}
+  ngOnInit(): void {}
 }
