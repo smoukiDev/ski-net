@@ -1,4 +1,6 @@
+import { IType } from './../shared/models/productType';
 import { IPagination } from './../shared/models/pagination';
+import { IBrand } from './../shared/models/brands';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -13,5 +15,13 @@ export class ShopService {
 
   getProducts(): Observable<IPagination> {
     return this.http.get<IPagination>(this.baseUrl + 'products?pageSize=50');
+  }
+
+  getBrands(): Observable<IBrand[]> {
+    return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
+  }
+
+  getTypes(): Observable<IType[]> {
+    return this.http.get<IType[]>(this.baseUrl + 'products/types');
   }
 }
