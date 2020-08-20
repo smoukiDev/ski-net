@@ -83,10 +83,11 @@
                     [totalItems] = "totalCount"
                     (pageChanged) = "onPageChanged($event)"
                     [itemsPerPage] = "this.shopParams.pageSize"
-                    previousText="&lsaquo;" 
-                    nextText="&rsaquo;" 
-                    firstText="&laquo;" 
-                    lastText="&raquo;">
+                    [maxSize] = "5"
+                    previousText="Previous" 
+                    nextText="Next" 
+                    firstText="First" 
+                    lastText="Last">
                 </pagination>
             </div>
 
