@@ -61,17 +61,12 @@
               </div>
             <div class="d-flex justify-content-center"  
             [style.visibility]="totalCount !== 0 ? 'visible' : 'hidden'">
-                <pagination 
-                    [boundaryLinks] = "true" 
-                    [totalItems] = "totalCount"
+                <app-pager
+                    [pageSize] = "shopParams.pageSize"
+                    [totalCount] = "totalCount"
+                    [maxPages] = "maxPages"
                     (pageChanged) = "onPageChanged($event)"
-                    [itemsPerPage] = "this.shopParams.pageSize"
-                    [maxSize] = "5"
-                    previousText="Previous" 
-                    nextText="Next" 
-                    firstText="First" 
-                    lastText="Last">
-                </pagination>
+                ></app-pager>
             </div>
 
         </section>

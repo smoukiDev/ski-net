@@ -11,6 +11,7 @@ import { IBrand } from '../shared/models/brands';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
+  maxPages = 3;
   products: IProduct[];
   brands: IBrand[];
   types: IType[];
@@ -75,7 +76,7 @@ export class ShopComponent implements OnInit {
   }
 
   onPageChanged(event: any): void {
-    this.shopParams.pageNumber = event.page;
+    this.shopParams.pageNumber = event;
     this.getProducts();
   }
 }
