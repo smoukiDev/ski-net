@@ -63,6 +63,7 @@
             [style.visibility]="totalCount !== 0 ? 'visible' : 'hidden'">
                 <app-pager
                     [pageSize] = "shopParams.pageSize"
+                    [activePage] = "shopParams.pageNumber"
                     [totalCount] = "totalCount"
                     [maxPages] = "maxPages"
                     (pageChanged) = "onPageChanged($event)"

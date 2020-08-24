@@ -1,12 +1,30 @@
-<pagination 
-    [boundaryLinks] = "true" 
-    [totalItems] = "totalCount"
-    (pageChanged) = "onPagerChange($event)"
-    [itemsPerPage] = "pageSize"
+<!--
+    <pagination 
+        [boundaryLinks] = "true" 
+        [totalItems] = "totalCount"
+        (pageChanged) = "onPagerChange($event)"
+        [itemsPerPage] = "pageSize"
+        [maxSize] = "maxPages"
+        previousText="Previous" 
+        nextText="Next" 
+        firstText="First" 
+        lastText="Last"
+    >
+    </pagination>
+-->
+<ngb-pagination
+    [boundaryLinks] = "true"
+    [ellipses] = "false"
+    [rotate] = "true"
+    [collectionSize] = "totalCount"
+    [page] = "activePage"
+    [pageSize] = "pageSize"
     [maxSize] = "maxPages"
-    previousText="Previous" 
-    nextText="Next" 
-    firstText="First" 
-    lastText="Last"
+    (pageChange) = "onPagerChange($event)"
 >
-</pagination>
+    <ng-template ngbPaginationFirst>First</ng-template>
+    <ng-template ngbPaginationLast>Last</ng-template>
+    <ng-template ngbPaginationPrevious>Previous</ng-template>
+    <ng-template ngbPaginationNext>Next</ng-template>
+    <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+</ngb-pagination>
