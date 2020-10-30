@@ -17,8 +17,6 @@ namespace API.Controllers
         public async Task<ActionResult<CustomerBasket>> GetBusketByIdAsync(string id)
         {
             var basket = await _basketRepository.GetBasketAsync(id);
-
-            // TODO: Test
             return Ok(basket ?? new CustomerBasket(id));
         }
 
@@ -30,9 +28,10 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        public async Task DeleteBasketAsync(string id)
+        public async Task<ActionResult> DeleteBasketAsync(string id)
         {
             await _basketRepository.DeleteBasketAsync(id);
+            return Ok();
         }
     }
 }
